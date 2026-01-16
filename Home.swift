@@ -8,53 +8,78 @@
 import SwiftUI
 
 struct HomeView: View {
+    
+    @State private var goToAnalyze = false
+
     var body: some View {
-        ZStack {
-            
-            
-            
-            
-            // Background
-            Color(red: 14/255, green: 30/255, blue: 38/255)
-                .ignoresSafeArea()
-            
-            VStack(spacing: 50) {
+        NavigationStack {
+            ZStack {
                 
-                Spacer()
                 
-                // Logo
-                Image(systemName: "shield.lefthalf.filled.badge.checkmark")
-                    .resizable()
-                    .scaledToFit()
-                    .foregroundColor(Color(red: 7/255, green: 169/255, blue: 204/255))
-                    .frame(width: 140)
                 
-                Text("SafeTap")
-                    .font(.system(size: 38, weight: .bold))
-                    .foregroundColor(Color(red: 7/255, green: 169/255, blue: 204/255))
                 
-                Spacer()
+                // Background
+                Color(red: 14/255, green: 30/255, blue: 38/255)
+                    .ignoresSafeArea()
                 
-                VStack(spacing: 30) {
+                VStack(spacing: 50) {
                     
-                    LiquidGlassButton(
-                        title: "Analyze message",
-                        systemIcon: "message.fill"
-                    ) {
-                        print("Analyze message")
-                    }
+                    Spacer()
                     
-                    LiquidGlassButton(
-                        title: "What should i do",
-                        systemIcon: "questionmark.circle.fill"
-                    ) {
-                        print("What should i do")
+                    // Logo
+                    Image(systemName: "shield.lefthalf.filled.badge.checkmark")
+                        .resizable()
+                        .scaledToFit()
+                        .foregroundColor(Color(red: 7/255, green: 169/255, blue: 204/255))
+                        .frame(width: 140)
+                    
+                    Text("SafeTap")
+                        .font(.system(size: 38, weight: .bold))
+                        .foregroundColor(Color(red: 7/255, green: 169/255, blue: 204/255))
+                    
+                    Spacer()
+                    
+                    VStack(spacing: 30) {
+                        
+                        //                    LiquidGlassButton(
+                        //                        title: "Analyze message",
+                        //                        systemIcon: "message.fill"
+                        //                    ) {
+                        //                        print("Analyze message")
+                        //                    }
+                        
+                        NavigationLink {
+                            AnalyzeMessageView()
+                                .navigationBarBackButtonHidden(true)
+                        } label: {
+                            LiquidGlassButton(
+                                title: "Analyze message",
+                                systemIcon: "message.fill"
+                            ) {
+                                goToAnalyze = true
+                            }
+                            
+                        }
+                        
+                        
+                        LiquidGlassButton(
+                            title: "What should i do",
+                            systemIcon: "questionmark.circle.fill"
+                        ) {
+                            print("What should i do")
+                        }
                     }
+                    .padding(.horizontal, 24)
+                    
+                    Spacer()
                 }
-                .padding(.horizontal, 24)
-                
-                Spacer()
             }
+            
+            // 🔥 Navigation destination
+                        .navigationDestination(isPresented: $goToAnalyze) {
+                            AnalyzeMessageView()
+                                .navigationBarBackButtonHidden(true)
+                        }
         }
     }
 }

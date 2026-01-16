@@ -66,3 +66,52 @@ struct LiquidGlassButton: View {
         .buttonStyle(.plain)
     }
 }
+
+
+
+
+struct GlassTextEditor: View {
+    @Binding var text: String
+    let placeholder: String
+    
+    var body: some View {
+        ZStack(alignment: .topLeading) {
+            
+            // Placeholder
+            if text.isEmpty {
+                Text(placeholder)
+                    .foregroundColor(.white.opacity(0.5))
+                    .padding(.top, 16)
+                    .padding(.leading, 16)
+            }
+            
+            TextEditor(text: $text)
+                .foregroundColor(.white)
+                .padding(12)
+                .background(Color.clear)
+                .scrollContentBackground(.hidden)
+        }
+        .frame(height: 280)
+        .background(
+            ZStack {
+                
+                // Glass Blur
+                RoundedRectangle(cornerRadius: 28)
+                    .fill(.ultraThinMaterial)
+                
+                // Glass Color
+                RoundedRectangle(cornerRadius: 28)
+                    .fill(
+                        Color.white.opacity(0.12)
+                    )
+                
+                // Border
+                RoundedRectangle(cornerRadius: 28)
+                    .stroke(
+                        Color.white.opacity(0.35),
+                        lineWidth: 1
+                    )
+            }
+        )
+    }
+}
