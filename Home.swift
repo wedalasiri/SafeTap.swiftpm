@@ -11,6 +11,9 @@ struct HomeView: View {
     var body: some View {
         ZStack {
             
+            
+            
+            
             // Background
             Color(red: 14/255, green: 30/255, blue: 38/255)
                 .ignoresSafeArea()
