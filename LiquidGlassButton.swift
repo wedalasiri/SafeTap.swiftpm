@@ -40,7 +40,7 @@ struct LiquidGlassButton: View {
                                 colors: [
 //                                    Color.white.opacity(0.25),
 //                                    Color.white.opacity(0.05),
-                                    Color.cyan/*.opacity(0.25)*/
+                                    Color.cyan.opacity(0.70)
                                 ],
                                 startPoint: .topLeading,
                                 endPoint: .bottomTrailing
