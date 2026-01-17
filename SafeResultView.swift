@@ -60,9 +60,12 @@ struct SafeResultView: View {
                          .navigationBarBackButtonHidden(true)
                     } label: {
                         LiquidGlassButton(
-                            title: "Done",
+                            title: "Got it",
                             systemIcon: nil,
-                            tintColor: .cyan
+                            tintColor: Color(red: 7/255, green: 169/255, blue: 204/255),
+                            height: 65,
+                            cornerRadius: 28
+                            
                         ) {
                             goToHome = true
                         }
@@ -84,11 +87,13 @@ struct SafeResultView: View {
                     Spacer(minLength: 10)
                 }
             }
+            .navigationDestination(isPresented: $goToHome) {
+                HomeView()
+                    .navigationBarBackButtonHidden(true)
+            }
         }
-        .navigationDestination(isPresented: $goToHome) {
-            HomeView()
-//                .navigationBarBackButtonHidden(true)
-        }
+     
+        
 
     }
 }

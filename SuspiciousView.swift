@@ -58,7 +58,7 @@ struct SuspiciousView: View {
                         points: [
                             " Do not share any personal information",
                             " Do not click links or follow instructions",
-                            "•Contact the organization using its official number"
+                            " Contact the organization using its official number"
                             
                         ]
                     )
@@ -67,10 +67,13 @@ struct SuspiciousView: View {
                     
                     // DONE BUTTON (your existing glass button)
                     LiquidGlassButton(
-                        title: "Done",
+                        title: "Got it ",
                         systemIcon: nil,
-                        tintColor: .cyan
+                        tintColor: Color(red: 7/255, green: 169/255, blue: 204/255),
+                        height: 65,
+                           cornerRadius: 28
                     ) {
+                        goToHome = true
                         print("Done tapped")
                     }
                     //                .padding(.horizontal, 24)
@@ -80,6 +83,10 @@ struct SuspiciousView: View {
                     
                     Spacer(minLength: 10)
                 }
+            }
+            .navigationDestination(isPresented: $goToHome) {
+                HomeView()
+                    .navigationBarBackButtonHidden(true)
             }
         }
     }

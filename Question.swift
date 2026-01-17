@@ -33,9 +33,9 @@ struct QuickCheckView: View {
                 
                 // Question
                 Text("""
-Did the caller ask for
-a one-time password (OTP)
-or verification code?
+ Did the caller ask for
+ a one-time password (OTP)
+ or verification code?
 """)
                     .font(.system(size: 38, weight: .medium))
                     .foregroundColor(.white)
@@ -49,7 +49,9 @@ or verification code?
                     LiquidGlassButton(
                         title: "Yes",
                         systemIcon: nil,
-                        tintColor: Color(red: 60/255, green: 190/255, blue: 170/255).opacity(53)
+                        tintColor: Color(red: 60/255, green: 190/255, blue: 170/255).opacity(53),
+                        height: 101,
+                           cornerRadius: 53
 
                     ) {
                         print("YES tapped")
@@ -58,7 +60,9 @@ or verification code?
                     LiquidGlassButton(
                         title: "No",
                         systemIcon: nil,
-                        tintColor: Color(red: 235/255, green: 84/255, blue: 54/255).opacity(53)
+                        tintColor: Color(red: 235/255, green: 84/255, blue: 54/255).opacity(53),
+                        height: 101,
+                           cornerRadius: 53
 
 
                     ) {

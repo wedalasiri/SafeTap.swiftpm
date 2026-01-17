@@ -23,7 +23,7 @@ struct HomeView: View {
                 Color(red: 14/255, green: 30/255, blue: 38/255)
                     .ignoresSafeArea()
                 
-                VStack(spacing: 50) {
+                VStack(spacing: 20) {
                     
                     Spacer()
                     
@@ -32,11 +32,14 @@ struct HomeView: View {
                         .resizable()
                         .scaledToFit()
                         .foregroundColor(Color(red: 7/255, green: 169/255, blue: 204/255))
-                        .frame(width: 140)
-                    
+                        .frame(width: 233, height: 185)
+                        .offset(x: 27)
+
                     Text("SafeTap")
-                        .font(.system(size: 38, weight: .bold))
+                        .font(.system(size: 48, weight: .bold))
                         .foregroundColor(Color(red: 7/255, green: 169/255, blue: 204/255))
+                        .offset( y: -30)
+                    
                     
                     Spacer()
                     
@@ -56,7 +59,9 @@ struct HomeView: View {
                             LiquidGlassButton(
                                 title: "Analyze message",
                                 systemIcon: "message.fill",
-                                tintColor: Color(red: 7/255, green: 169/255, blue: 204/255)
+                                tintColor: Color(red: 7/255, green: 169/255, blue: 204/255),
+                                height: 90,
+                                   cornerRadius: 40,
                                 
                             ) {
                                 goToAnalyze = true
@@ -71,7 +76,9 @@ struct HomeView: View {
                             LiquidGlassButton(
                                 title: "What should i do",
                                 systemIcon: "questionmark.circle.fill",
-                                tintColor: Color(red: 7/255, green: 169/255, blue: 204/255)
+                                tintColor: Color(red: 7/255, green: 169/255, blue: 204/255),
+                                height: 90,
+                                cornerRadius: 40
                                 
                             ) {
                                 goToWhatShouldIdo = true

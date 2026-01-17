@@ -13,6 +13,8 @@ struct LiquidGlassButton: View {
     let title: String
     let systemIcon: String?
     let tintColor: Color
+    let height: CGFloat        // ⬅️ جديد
+    let cornerRadius: CGFloat  // ⬅️ جديد
     let action: () -> Void
     
     var body: some View {
@@ -29,10 +31,10 @@ struct LiquidGlassButton: View {
                 Text(title)
                     .font(.system(size: 26, weight: .medium))
             }
-            .foregroundColor(.white)
+            .foregroundColor(Color(red: 14/255, green: 30/255, blue: 38/255))
             .padding()
             .frame(maxWidth: .infinity)
-            .frame(height: 90)
+            .frame(height: height)
             .background(
                 ZStack {
                     

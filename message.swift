@@ -38,11 +38,15 @@ struct AnalyzeMessageView: View {
                 LiquidGlassButton(
                     title: "Analyze",
                     systemIcon:  nil,
-                    tintColor: Color(red: 7/255, green: 169/255, blue: 204/255)
+                    tintColor: Color(red: 7/255, green: 169/255, blue: 204/255),
+                    height: 65,
+                    cornerRadius: 28
                 ) {
                     print(messageText)
                 }
-                .padding(.horizontal, 24)
+                .frame(width: 320)
+                .frame(height: 64)
+//                .padding(.horizontal, 24)
                 
                 Spacer()
                 Spacer()
