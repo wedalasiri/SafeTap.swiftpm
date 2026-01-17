@@ -37,8 +37,8 @@ struct AnalyzeMessageView: View {
                 // Liquid Glass Button (YOUR COMPONENT)
                 LiquidGlassButton(
                     title: "Analyze",
-                    systemIcon: "shield.checkerboard",
-                    tintColor: Color(red: 60/255, green: 190/255, blue: 170/255)
+                    systemIcon:  nil,
+                    tintColor: Color(red: 7/255, green: 169/255, blue: 204/255)
                 ) {
                     print(messageText)
                 }

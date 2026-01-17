@@ -10,6 +10,7 @@ import SwiftUI
 struct HomeView: View {
     
     @State private var goToAnalyze = false
+    @State private var goToWhatShouldIdo = false
 
     var body: some View {
         NavigationStack {
@@ -50,27 +51,33 @@ struct HomeView: View {
                         
                         NavigationLink {
                             AnalyzeMessageView()
-                                .navigationBarBackButtonHidden(true)
+                             .navigationBarBackButtonHidden(true)
                         } label: {
                             LiquidGlassButton(
                                 title: "Analyze message",
                                 systemIcon: "message.fill",
                                 tintColor: Color(red: 7/255, green: 169/255, blue: 204/255)
-
+                                
                             ) {
                                 goToAnalyze = true
                             }
                             
                         }
                         
-                        
-                        LiquidGlassButton(
-                            title: "What should i do",
-                            systemIcon: "questionmark.circle.fill",
-                            tintColor: Color(red: 7/255, green: 169/255, blue: 204/255)
-
-                        ) {
-                            print("What should i do")
+                        NavigationLink {
+                            QuickCheckView()
+                             .navigationBarBackButtonHidden(true)
+                        } label: {
+                            LiquidGlassButton(
+                                title: "What should i do",
+                                systemIcon: "questionmark.circle.fill",
+                                tintColor: Color(red: 7/255, green: 169/255, blue: 204/255)
+                                
+                            ) {
+                                goToWhatShouldIdo = true
+                                
+                                print("What should i do")
+                            }
                         }
                     }
                     .padding(.horizontal, 24)
@@ -82,7 +89,11 @@ struct HomeView: View {
             // 🔥 Navigation destination
                         .navigationDestination(isPresented: $goToAnalyze) {
                             AnalyzeMessageView()
-                                .navigationBarBackButtonHidden(true)
+//                                .navigationBarBackButtonHidden(true)
+                        }
+                        .navigationDestination(isPresented: $goToWhatShouldIdo) {
+                            QuickCheckView()
+//                                .navigationBarBackButtonHidden(true)
                         }
         }
     }

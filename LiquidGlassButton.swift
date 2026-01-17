@@ -189,3 +189,38 @@ struct GlassTextEditor: View {
         )
     }
 }
+
+struct GlassInfoCard: View {
+    let title: String
+    let points: [String]
+    
+    var body: some View {
+        VStack(alignment: .leading, spacing: 14) {
+            
+            Text(title)
+                .font(.system(size: 20, weight: .medium))
+                .foregroundColor(.white)
+                .frame(maxWidth: .infinity, alignment: .center)
+            
+            ForEach(points, id: \.self) { point in
+                Text("• \(point)")
+                    .foregroundColor(.white.opacity(0.9))
+                    .font(.system(size: 17))
+            }
+        }
+        .padding(20)
+        .background(
+            ZStack {
+                RoundedRectangle(cornerRadius: 28)
+                    .fill(.ultraThinMaterial)
+                
+                RoundedRectangle(cornerRadius: 28)
+                    .fill(Color.white.opacity(0.12))
+                
+                RoundedRectangle(cornerRadius: 28)
+                    .stroke(Color.white.opacity(0.35), lineWidth: 1)
+            }
+        )
+        .padding(.horizontal, 24)
+    }
+}
