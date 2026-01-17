@@ -54,7 +54,9 @@ struct HomeView: View {
                         } label: {
                             LiquidGlassButton(
                                 title: "Analyze message",
-                                systemIcon: "message.fill"
+                                systemIcon: "message.fill",
+                                tintColor: Color(red: 7/255, green: 169/255, blue: 204/255)
+
                             ) {
                                 goToAnalyze = true
                             }
@@ -64,7 +66,9 @@ struct HomeView: View {
                         
                         LiquidGlassButton(
                             title: "What should i do",
-                            systemIcon: "questionmark.circle.fill"
+                            systemIcon: "questionmark.circle.fill",
+                            tintColor: Color(red: 7/255, green: 169/255, blue: 204/255)
+
                         ) {
                             print("What should i do")
                         }
