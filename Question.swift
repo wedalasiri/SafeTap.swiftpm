@@ -9,6 +9,32 @@ import SwiftUI
 
 
 struct QuickCheckView: View {
+    
+    
+    // جميع الأسئلة
+    let questions: [String] = [
+        """
+Did the caller ask for
+a one-time password (OTP)
+or verification code?
+""",
+        """
+Did the caller claim to be from
+a trusted organization and ask
+for sensitive information?
+""",
+        """
+Did the caller rush or scare you
+into acting immediately?
+""",
+        """
+Did the caller ask you not to
+tell anyone about the call?
+"""
+    ]
+    
+    // السؤال الحالي
+    @State private var currentIndex = 0
     var body: some View {
         ZStack {
             // Background
@@ -18,11 +44,21 @@ struct QuickCheckView: View {
             VStack(spacing: 32) {
                 
                 // Progress Bar
-                ProgressView(value: 0.15)
-                    .progressViewStyle(LinearProgressViewStyle())
-                    .tint(Color(red: 60/255, green: 190/255, blue: 170/255).opacity(53))
-                    .frame(width: 300)
-                    .padding(.top, 20)
+//                ProgressView(value: 0.15)
+//                    .progressViewStyle(LinearProgressViewStyle())
+//                    .tint(Color(red: 60/255, green: 190/255, blue: 170/255).opacity(53))
+//                    .frame(width: 300)
+//                    .padding(.top, 20)
+                ProgressView(
+                    value: Double(currentIndex + 1),
+                    total: Double(questions.count)
+                )
+                .progressViewStyle(LinearProgressViewStyle())
+                .tint(Color(red: 60/255, green: 190/255, blue: 170/255))
+                .frame(width: 300)
+                .padding(.top, 20)
+                .animation(.easeInOut, value: currentIndex)
+
                 
                 // Title
                 Text("Quick Check")
@@ -32,11 +68,7 @@ struct QuickCheckView: View {
                 Spacer()
                 
                 // Question
-                Text("""
- Did the caller ask for
- a one-time password (OTP)
- or verification code?
-""")
+                Text(questions[currentIndex])
                     .font(.system(size: 38, weight: .medium))
                     .foregroundColor(.white)
                     .multilineTextAlignment(.center)
@@ -54,6 +86,8 @@ struct QuickCheckView: View {
                            cornerRadius: 53
 
                     ) {
+                        nextQuestion()
+
                         print("YES tapped")
                     }
                     
@@ -66,6 +100,8 @@ struct QuickCheckView: View {
 
 
                     ) {
+                        nextQuestion()
+
                         print("NO tapped")
                     }
                 }
@@ -74,6 +110,14 @@ struct QuickCheckView: View {
             }
         }
     }
+    func nextQuestion() {
+          if currentIndex < questions.count - 1 {
+              currentIndex += 1
+          } else {
+              print("Finished questions")
+              // هنا لاحقًا تنتقل لصفحة النتيجة
+          }
+      }
 }
 #Preview {
     QuickCheckView()
