@@ -49,8 +49,21 @@ tell anyone about the call?
     @State private var analyzingProgress: Double = 0
 
 
-    // السؤال الحالي
+    @State private var navigate = false
     @State private var currentIndex = 0
+    
+    
+    var resultType: ResultType {
+        if riskScore == 0 {
+            return .safe
+        } else if riskScore <= 2 {
+            return .suspicious
+        } else if riskScore <= 4{
+            return .scam
+        } else {
+            return .scam
+        }
+    }
     var body: some View {
         ZStack {
             // Background
@@ -163,7 +176,6 @@ tell anyone about the call?
                             .frame(width: 260)
                             .offset(y: -80)
                     }
-                    // هذا السر ✨
                     .offset(y: 40)
                 }
                 .transition(.opacity)
@@ -172,7 +184,16 @@ tell anyone about the call?
 
         }
         
-        
+        .fullScreenCover(isPresented: $navigate) {
+            switch resultType {
+            case .safe:
+                SafeResultView()
+            case .suspicious:
+                SuspiciousView()
+            case .scam:
+                ScamView()
+            }
+        }
 //        if isAnalyzing {
 //            ZStack {
 //                // تعتيم الخلفية
@@ -202,15 +223,7 @@ tell anyone about the call?
 //        }
 
         
-        var resultType: ResultType {
-            if riskScore == 0 {
-                return .safe
-            } else if riskScore <= 2 {
-                return .suspicious
-            } else {
-                return .scam
-            }
-        }
+        
 
         
     }
@@ -232,22 +245,17 @@ tell anyone about the call?
                 isAnalyzing = true
                 analyzingProgress = 0
             }
-            
-            // تحريك شريط التحميل
             Timer.scheduledTimer(withTimeInterval: 0.02, repeats: true) { timer in
-                // Clamp to 0...1 to avoid out-of-bounds values.
                 analyzingProgress = min(analyzingProgress + 0.02, 1)
                 if analyzingProgress >= 1 {
                     timer.invalidate()
-                    
                     withAnimation(.easeOut) {
                         isAnalyzing = false
-                        showResult = true
+                        navigate = true
                     }
                 }
             }
         }
-        
     }
 }
 enum ResultType {
