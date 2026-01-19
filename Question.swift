@@ -33,6 +33,13 @@ tell anyone about the call?
 """
     ]
     
+    let hints: [String] = [
+        "", // السؤال الأول ← فاضي (ما راح يظهر)
+        "Banks may call, but they never ask for OTPs or passwords.",
+        "Urgency and threats are common scam tactics.",
+        "This is often used to prevent you from getting help."
+    ]
+
     // السؤال الحالي
     @State private var currentIndex = 0
     var body: some View {
@@ -74,6 +81,27 @@ tell anyone about the call?
                     .multilineTextAlignment(.center)
                     .padding(.horizontal, 24)
                 
+                if currentIndex > 0 {
+                    Text(hints[currentIndex])
+                        .font(.system(size: 20, weight: .medium))
+                        .foregroundColor(.white)
+                        .multilineTextAlignment(.center)
+                        .padding(.horizontal, 24)
+                        .padding(.vertical, 20)
+                        .background(
+                            RoundedRectangle(cornerRadius: 28)
+                                .fill(.ultraThinMaterial)
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 28)
+                                        .stroke(Color.white.opacity(0.4), lineWidth: 2.5)
+                                )
+                        )
+                        .padding(.horizontal, 24)
+                        .transition(.move(edge: .bottom).combined(with: .opacity))
+                        .animation(.easeInOut, value: currentIndex)
+                }
+
+                
                 Spacer()
                 
                 // Buttons
@@ -87,7 +115,6 @@ tell anyone about the call?
 
                     ) {
                         nextQuestion()
-
                         print("YES tapped")
                     }
                     
@@ -101,7 +128,6 @@ tell anyone about the call?
 
                     ) {
                         nextQuestion()
-
                         print("NO tapped")
                     }
                 }
@@ -118,6 +144,7 @@ tell anyone about the call?
               // هنا لاحقًا تنتقل لصفحة النتيجة
           }
       }
+    
 }
 #Preview {
     QuickCheckView()
