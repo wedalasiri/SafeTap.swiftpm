@@ -61,7 +61,7 @@ struct LiquidGlassButton: View {
                         .stroke(
                             LinearGradient(
                                 colors: [
-                                    Color.white.opacity(0.6),
+//                                    Color.white.opacity(0.6),
                                     Color.clear
                                 ],
                                 startPoint: .topLeading,
@@ -174,19 +174,27 @@ struct GlassTextEditor: View {
                 // Glass Blur
                 RoundedRectangle(cornerRadius: 28)
                     .fill(.ultraThinMaterial)
+                    
                 
                 // Glass Color
                 RoundedRectangle(cornerRadius: 28)
                     .fill(
                         Color.white.opacity(0.12)
+                        
                     )
                 
                 // Border
                 RoundedRectangle(cornerRadius: 28)
                     .stroke(
                         Color.white.opacity(0.35),
-                        lineWidth: 1
+                        lineWidth: 0
+                        
                     )
+                
+                                            .overlay(
+                                                RoundedRectangle(cornerRadius: 28)
+                                                    .stroke(Color.white.opacity(0.4), lineWidth: 2.5)
+                                            )
             }
         )
     }
@@ -215,6 +223,10 @@ struct GlassInfoCard: View {
             ZStack {
                 RoundedRectangle(cornerRadius: 28)
                     .fill(.ultraThinMaterial)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 28)
+                            .stroke(Color.white.opacity(0.4), lineWidth: 2.5)
+                    )
                 
                 RoundedRectangle(cornerRadius: 28)
                     .fill(Color.white.opacity(0.12))

@@ -28,6 +28,7 @@ struct SafeResultView: View {
                         .scaledToFit()
                         .frame(width: 120)
                         .foregroundColor(Color(red: 72/255, green: 170/255, blue: 155/255))
+                        .offset(x : 13)
                     
                     // Title
                     Text("safe")

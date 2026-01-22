@@ -255,6 +255,17 @@ tell anyone about the call?
                     }
                 }
             }
+//            Task { @MainActor in
+//                // Simulate progress on the main actor
+//                while analyzingProgress < 1 {
+//                    try? await Task.sleep(nanoseconds: 20_000_000) // 0.02s
+//                    analyzingProgress = min(analyzingProgress + 0.02, 1)
+//                }
+//                withAnimation(.easeOut) {
+//                    isAnalyzing = false
+//                    navigate = true
+//                }
+//            }
         }
     }
 }
