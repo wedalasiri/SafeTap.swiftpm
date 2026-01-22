@@ -211,12 +211,23 @@ struct GlassInfoCard: View {
                 .font(.system(size: 20, weight: .medium))
                 .foregroundColor(.white)
                 .frame(maxWidth: .infinity, alignment: .center)
+                .offset(y : -15)
+            
             
             ForEach(points, id: \.self) { point in
-                Text("• \(point)")
-                    .foregroundColor(.white.opacity(0.9))
-                    .font(.system(size: 17))
+                HStack(alignment: .top, spacing: 5) {
+//                    Text("•")
+//                        .foregroundColor(.white.opacity(0.9))
+//                        .font(.system(size: 17))
+                    
+
+                    Text(point)
+                        .foregroundColor(.white.opacity(0.9))
+                        .font(.system(size: 17))
+                        .fixedSize(horizontal: false, vertical: true)
+                }
             }
+
         }
         .padding(20)
         .background(
