@@ -119,7 +119,7 @@ struct AnalyzeMessageView: View {
         }
 
         Timer.scheduledTimer(withTimeInterval: 0.02, repeats: true) { timer in
-            analyzingProgress += 0.02
+            analyzingProgress = min(analyzingProgress + 0.02, 1)
 
             if analyzingProgress >= 1 {
                 timer.invalidate()
