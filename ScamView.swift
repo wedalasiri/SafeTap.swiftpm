@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ScamView: View {
     @State private var goToHome = false
-    
+    let reasons: [String] 
     var body: some View {
         NavigationStack{
             
@@ -38,11 +38,8 @@ struct ScamView: View {
                     // WHY
                     GlassInfoCard(
                         title: "Why",
-                        points: [
-                            "Requested OTP, passwords, or financial details ",
-                            "Used pressure, fear, or urgency",
-                            "Asked you to keep the interaction secret"
-                        ]
+                        points: reasons
+
                     )
                     
                     // WHAT SHOULD I DO
@@ -86,5 +83,9 @@ struct ScamView: View {
     }
 }
 #Preview {
-    ScamView()
+    ScamView(reasons: [
+        "Requests a one‑time password (OTP)",
+        "Contains a suspicious link",
+        "Uses urgency or pressure tactics"
+    ])
 }

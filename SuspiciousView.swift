@@ -16,7 +16,7 @@ import SwiftUI
 
 struct SuspiciousView: View {
     @State private var goToHome = false
-    
+    let reasons: [String]
     var body: some View {
         NavigationStack{
             
@@ -45,20 +45,22 @@ struct SuspiciousView: View {
                     // WHY
                     GlassInfoCard(
                         title: "Why",
-                        points: [
-                            " The caller  claimed to be from a trusted entity ",
-                            " created urgency",
-                            " Asked for unusual information"
-                        ]
+                        points: reasons.isEmpty
+                            ? [
+                                "The caller claimed to be from a trusted entity",
+                                "Created urgency",
+                                "Asked for unusual information"
+                              ]
+                            : reasons
                     )
                     
                     // WHAT SHOULD I DO
                     GlassInfoCard(
                         title: "What should i do",
                         points: [
-                            " Do not share any personal information",
-                            " Do not click links or follow instructions",
-                            " Contact the organization using its official number"
+                            "Do not share any personal information",
+                            "Do not click links or follow instructions",
+                            "Contact the organization using its official number"
                             
                         ]
                     )
@@ -71,14 +73,12 @@ struct SuspiciousView: View {
                         systemIcon: nil,
                         tintColor: Color(red: 7/255, green: 169/255, blue: 204/255),
                         height: 65,
-                           cornerRadius: 28
+                        cornerRadius: 28
                     ) {
                         goToHome = true
                         print("Done tapped")
                     }
-                    //                .padding(.horizontal, 24)
-                    //                .frame(width: 300 ,height: 40)
-                    .frame(height: 10)          // ← تحكم بالارتفاع
+                    .frame(height: 10)
                     .frame(maxWidth: 280)
                     
                     Spacer(minLength: 10)
@@ -91,6 +91,11 @@ struct SuspiciousView: View {
         }
     }
 }
+
 #Preview {
-    SuspiciousView()
+    SuspiciousView(reasons: [
+        "Contains a suspicious link",
+        "Uses urgency or pressure",
+        "Asks for a verification code"
+    ])
 }

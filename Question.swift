@@ -52,6 +52,8 @@ tell anyone about the call?
     @State private var navigate = false
     @State private var currentIndex = 0
     
+    @State private var reasons: [String] = []
+
     
     var resultType: ResultType {
         if riskScore == 0 {
@@ -137,6 +139,8 @@ tell anyone about the call?
 
                     ) {
                         riskScore += 1
+                        reasons.append(questions[currentIndex])
+
                         nextQuestion()
                         print("YES tapped")
                     }
@@ -189,9 +193,9 @@ tell anyone about the call?
             case .safe:
                 SafeResultView()
             case .suspicious:
-                SuspiciousView()
+                SuspiciousView(reasons: reasons)
             case .scam:
-                ScamView()
+                ScamView(reasons: reasons)
             }
         }
 //        if isAnalyzing {
@@ -274,6 +278,8 @@ enum ResultType {
     case suspicious
     case scam
 }
+
+
 
 #Preview {
     QuickCheckView()

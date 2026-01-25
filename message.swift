@@ -7,10 +7,13 @@
 
 import SwiftUI
 
+
 struct AnalyzeMessageView: View {
     
     @State private var messageText = ""
-    @State private var result: ResultType? = nil
+//    @State private var result: ResultType? = nil
+    @State private var analysisResult: AnalysisResult?
+
     @State private var showResult = false
     @State private var isAnalyzing = false
     @State private var analyzingProgress: Double = 0
@@ -95,14 +98,14 @@ struct AnalyzeMessageView: View {
         }
             
         .fullScreenCover(isPresented: $showResult) {
-            if let result = result {
-                switch result {
+            if let analysisResult = analysisResult {
+                switch analysisResult.type {
                 case .safe:
                     SafeResultView()
                 case .suspicious:
-                    SuspiciousView()
+                    SuspiciousView(reasons: analysisResult.reasons)
                 case .scam:
-                    ScamView()
+                    ScamView(reasons: analysisResult.reasons)
                 }
             }
         }
@@ -125,7 +128,7 @@ struct AnalyzeMessageView: View {
                 timer.invalidate()
 
                 // هنا فقط نحسب النتيجة
-                result = analyzeMessage(messageText)
+                analysisResult = analyzeMessage(messageText)
 
                 withAnimation(.easeOut) {
                     isAnalyzing = false

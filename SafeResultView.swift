@@ -9,7 +9,6 @@ import SwiftUI
 
 struct SafeResultView: View {
     @State private var goToHome = false
-
     var body: some View {
         NavigationStack{
             ZStack {
