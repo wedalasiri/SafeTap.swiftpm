@@ -61,7 +61,7 @@ struct HomeView: View {
                                 systemIcon: "message.fill",
                                 tintColor: Color(red: 7/255, green: 169/255, blue: 204/255),
                                 height: 90,
-                                   cornerRadius: 40,
+                                   cornerRadius: 40
                                 
                             ) {
                                 goToAnalyze = true

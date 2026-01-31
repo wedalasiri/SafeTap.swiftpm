@@ -105,10 +105,75 @@
 //    }
 //}
 
+import Foundation
+
+
 struct AnalysisResult {
     let type: ResultType
     let reasons: [String]
 }
+
+struct MessageSample: Codable {
+    let text: String
+    let label: String
+}
+
+
+
+
+
+func loadMessagesFromJSON() -> [MessageSample] {
+    let playgroundPath = URL(fileURLWithPath: #filePath).deletingLastPathComponent()
+    let fileURL = playgroundPath.appendingPathComponent("messages_dataset_raw.json")
+    
+    do {
+        let data = try Data(contentsOf: fileURL)
+        return try JSONDecoder().decode([MessageSample].self, from: data)
+        print("✅")
+    } catch {
+        print("❌ Error loading JSON: \(error)")
+        return []
+    }
+}
+
+
+
+
+
+
+
+
+
+//// 📊 Dataset matching
+//for sample in dataset {
+//    if lower.contains(sample.text.lowercased()) {
+//
+//        switch sample.label {
+//        case "scam":
+//            score += 3
+//            reasons.append("Similar to known scam messages")
+//
+//        case "suspicious":
+//            score += 1
+//            reasons.append("Similar to suspicious messages")
+//
+//        case "safe":
+//            score -= 2
+//            reasons.append("Similar to safe messages")
+//
+//        default:
+//            break
+//        }
+//    }
+//}
+
+
+
+
+
+
+
+
 
 
 
@@ -160,6 +225,26 @@ func analyzeMessage(_ text: String) -> AnalysisResult {
         }
     }
 
+    // 📊 Dataset matching
+    let dataset = loadMessagesFromJSON()
+    for sample in dataset {
+        if lower.contains(sample.text.lowercased()) {
+            switch sample.label {
+            case "scam":
+                score += 3
+                reasons.append("Similar to known scam messages")
+            case "suspicious":
+                score += 1
+                reasons.append("Similar to suspicious messages")
+            case "safe":
+                score -= 2
+                reasons.append("Similar to safe messages")
+            default:
+                break
+            }
+        }
+    }
+
     // 🧠 Final decision
     let type: ResultType
     if score >= 5 {
@@ -172,3 +257,75 @@ func analyzeMessage(_ text: String) -> AnalysisResult {
 
     return AnalysisResult(type: type, reasons: reasons)
 }
+
+
+
+
+
+
+
+
+//func analyzeMessage(_ text: String) -> ResultType {
+//    let lower = text.lowercased()
+//
+//    var action = false
+//    var threat = false
+//    var sensitive = false
+//    var reward = false
+//    var external = false
+//
+//    // 1️⃣ Action requests (what scammer wants you to do)
+//    let actionWords = [
+//        "click", "tap", "open", "visit",
+//        "send", "reply", "enter",
+//        "update", "confirm", "verify", "pay"
+//    ]
+//    action = actionWords.contains { lower.contains($0) }
+//
+//    // 2️⃣ Threat / urgency
+//    let threatWords = [
+//        "urgent", "immediately", "within",
+//        "account suspended", "account locked",
+//        "final notice", "last chance",
+//        "avoid suspension"
+//    ]
+//    threat = threatWords.contains { lower.contains($0) }
+//
+//    // 3️⃣ Sensitive info
+//    let sensitiveWords = [
+//        "otp", "verification code", "password",
+//        "iban", "bank", "credit card",
+//        "transfer", "payment"
+//    ]
+//    sensitive = sensitiveWords.contains { lower.contains($0) }
+//
+//    // 4️⃣ Rewards / too good to be true
+//    let rewardWords = [
+//        "congratulations", "you won",
+//        "winner", "prize", "reward",
+//        "offer", "free"
+//    ]
+//    reward = rewardWords.contains { lower.contains($0) }
+//
+//    // 5️⃣ External link or contact
+//    external =
+//        lower.contains("http://") ||
+//        lower.contains("https://") ||
+//        lower.contains("www.") ||
+//        lower.contains("whatsapp") ||
+//        lower.contains("telegram")
+//
+//    // 🧠 Decision logic (صيغة الرسالة)
+//    if (action && sensitive) ||
+//       (threat && action) ||
+//       (reward && action && external) ||
+//       (sensitive && external) {
+//        return .scam
+//    }
+//
+//    if action || threat || reward || sensitive || external {
+//        return .suspicious
+//    }
+//
+//    return .safe
+//}
