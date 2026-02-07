@@ -17,7 +17,7 @@ let package = Package(
             name: "SafeTap",
             targets: ["AppModule"],
             bundleIdentifier: "wed.SafeTap",
-            teamIdentifier: "F3UMP538ZD",
+            teamIdentifier: "U2S964YRSC",
             displayVersion: "1.0",
             bundleVersion: "1",
             appIcon: .asset("AppIcon"),

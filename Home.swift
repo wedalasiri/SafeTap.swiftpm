@@ -93,6 +93,7 @@ struct HomeView: View {
                 }
             }
             
+            
             // 🔥 Navigation destination
                         .navigationDestination(isPresented: $goToAnalyze) {
                             AnalyzeMessageView()
