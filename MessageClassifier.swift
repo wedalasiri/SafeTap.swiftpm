@@ -1,14 +1,13 @@
-//
-//  MessageClassifier.swift
-//  SafeTap
-//
-//  Created by Wed Ahmed Alasiri on 19/08/1447 AH.
-//
-
+////
+////  MessageClassifier.swift
+////  SafeTap
+////
+////  Created by Wed Ahmed Alasiri on 19/08/1447 AH.
+////
 import Foundation
 import CoreML
 
-class ScamMessageClassifierManual {
+class ScamMessageClassifier{
 
     let model: MLModel
 
