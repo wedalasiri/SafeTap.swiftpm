@@ -75,7 +75,7 @@ struct HomeView: View {
                         } label: {
                             LiquidGlassButton(
                                 title: "What should i do",
-                                systemIcon: "questionmark.circle.fill",
+                                systemIcon: "phone.fill",
                                 tintColor: Color(red: 7/255, green: 169/255, blue: 204/255),
                                 height: 90,
                                 cornerRadius: 40
