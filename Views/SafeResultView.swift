@@ -38,8 +38,8 @@ struct SafeResultView: View {
                     GlassInfoCard(
                         title: "Why",
                         points: [
-                            "No request for OTP or passwords",
-                            "No pressure or threats",
+                            "Caller didn’t ask for OTP or passwords",
+                            "No attempts to scare or rush you",
                             "No sensitive information requested"
                         ]
                     )
@@ -48,8 +48,8 @@ struct SafeResultView: View {
                     GlassInfoCard(
                         title: "What should i do",
                         points: [
-                            "You can safely ignore or continue normally",
-                            "Stay aware if the situation changes"
+                            "You’re safe — no action needed",
+                            "Just continue as usual"
                         ]
                     )
                     
@@ -72,16 +72,7 @@ struct SafeResultView: View {
                         
                     }
                     
-//                    LiquidGlassButton(
-//                        title: "Done",
-//                        systemIcon: nil,
-//                        tintColor: .cyan
-//                    ) {
-//                        print("Done tapped")
-//                    }
-                    //                .padding(.horizontal, 24)
-                    //                .frame(width: 300 ,height: 40)
-                    .frame(height: 10)          // ← تحكم بالارتفاع
+                    .frame(height: 10)
                     .frame(maxWidth: 280)
                     
                     Spacer(minLength: 10)

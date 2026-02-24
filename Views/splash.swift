@@ -46,8 +46,8 @@ struct SafeTapSplashView: View {
             withAnimation(.easeOut(duration: 1.2)) {
                 animate = true
             }
-            // Optional: navigate to Home after splash delay
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            //  navigate to main  after splash delay
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.8) {
                 navigateToHome = true
             }
         }

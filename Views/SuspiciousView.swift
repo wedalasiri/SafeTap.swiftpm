@@ -1,5 +1,5 @@
 //
-//  ScamView.swift
+//  SuspiciousView.swift
 //  SafeTap
 //
 //  Created by Wed Ahmed Alasiri on 28/07/1447 AH.
@@ -7,9 +7,9 @@
 
 import SwiftUI
 
-struct ScamView: View {
+struct SuspiciousView: View {
     @State private var goToHome = false
-    let reasons: [String] 
+    let reasons: [String]
     var body: some View {
         NavigationStack{
             
@@ -24,14 +24,14 @@ struct ScamView: View {
                     Spacer()
                     
                     // Icon
-                    Image(systemName: "xmark.circle")
+                    Image(systemName: "exclamationmark.triangle.fill")
                         .resizable()
                         .scaledToFit()
                         .frame(width: 120)
-                        .foregroundColor( Color(red: 235/255, green: 84/255, blue: 54/255))
+                        .foregroundColor(Color(red: 229/255, green: 187/255, blue: 67/255))
                     
                     // Title
-                    Text("Scam")
+                    Text("Suspicious")
                         .font(.system(size: 44, weight: .bold))
                         .foregroundColor(.white)
                     
@@ -39,24 +39,23 @@ struct ScamView: View {
                     GlassInfoCard(
                         title: "Why",
                         points: reasons
-
                     )
                     
                     // WHAT SHOULD I DO
                     GlassInfoCard(
                         title: "What should i do",
                         points: [
-                            "Hang up or stop responding immediately",
-                            "Do not share any information",
-                            "Report the incident to the official authority"
+                            "Do not share any personal information",
+                            "Do not click links or follow instructions"
+                            
                         ]
                     )
                     
                     Spacer()
                     
-                    // DONE BUTTON (your existing glass button)
+                    // DONE BUTTON
                     LiquidGlassButton(
-                        title: "Got it",
+                        title: "Got it ",
                         systemIcon: nil,
                         tintColor: Color(red: 7/255, green: 169/255, blue: 204/255),
                         height: 65,
@@ -65,9 +64,7 @@ struct ScamView: View {
                         goToHome = true
                         print("Done tapped")
                     }
-                    //                .padding(.horizontal, 24)
-                    //                .frame(width: 300 ,height: 40)
-                    .frame(height: 10)          // ← تحكم بالارتفاع
+                    .frame(height: 10)
                     .frame(maxWidth: 280)
                     
                     Spacer(minLength: 10)
@@ -77,15 +74,14 @@ struct ScamView: View {
                 HomeView()
                     .navigationBarBackButtonHidden(true)
             }
-            
-            
         }
     }
 }
+
 #Preview {
-    ScamView(reasons: [
-        "Requests a one‑time password (OTP)",
+    SuspiciousView(reasons: [
         "Contains a suspicious link",
-        "Uses urgency or pressure tactics"
+        "Uses urgency or pressure",
+        "Asks for a verification code"
     ])
 }

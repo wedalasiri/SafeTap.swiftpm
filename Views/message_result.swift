@@ -23,12 +23,23 @@ struct ResultView: View {
                     Spacer()
 
                     // Icon
-                    Image(systemName: iconName)
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 120)
-                        .foregroundColor(iconColor)
-
+                    ZStack {
+                        if result.type == .safe {
+                            Image(systemName: iconName)
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 120)
+                                .foregroundColor(iconColor)
+                                .offset(x : 13)
+                        } else {
+                            Image(systemName: iconName)
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 120)
+                                .foregroundColor(iconColor)
+                        }
+                    }
+                    .frame(maxWidth: .infinity)
                     // Title
                     Text(title)
                         .font(.system(size: 44, weight: .bold))
@@ -69,7 +80,7 @@ struct ResultView: View {
         }
     }
 
-    // MARK: - Helpers
+    // result from message
     var title: String {
         switch result.type {
         case .safe: return "Safe"
@@ -97,8 +108,8 @@ struct ResultView: View {
     var defaultReasons: [String] {
         switch result.type {
         case .safe: return [
-            "No request for OTP or passwords",
-            "No pressure or threats",
+            "didn’t ask for OTP or passwords",
+            "No attempts to scare or rush you",
             "No sensitive information requested"
         ]
         case .suspicious: return [
@@ -107,7 +118,7 @@ struct ResultView: View {
             "Asked for unusual information"
         ]
         case .scam: return [
-            "Pattern matches known scam behavior"
+            ""
         ]
         }
     }
@@ -115,18 +126,17 @@ struct ResultView: View {
     var whatToDo: [String] {
         switch result.type {
         case .safe: return [
-            "You can safely ignore or continue normally",
-            "Stay aware if the situation changes"
+            "You’re safe — no action needed",
+            "Just continue as usual"
         ]
         case .suspicious: return [
             "Do not share any personal information",
-            "Do not click links or follow instructions",
-            "Contact the organization using its official number"
+            "Do not click links or follow instructions"
         ]
         case .scam: return [
-            "Hang up or stop responding immediately",
+            "Hang up immediately",
             "Do not share any information",
-            "Report the incident to the official authority"
+            "Report to authorities"
         ]
         }
     }

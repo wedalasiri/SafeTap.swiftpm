@@ -1,12 +1,5 @@
 //
-//  SuspiciousView.swift
-//  SafeTap
-//
-//  Created by Wed Ahmed Alasiri on 28/07/1447 AH.
-//
-
-//
-//  SafeResultView.swift
+//  ScamView.swift
 //  SafeTap
 //
 //  Created by Wed Ahmed Alasiri on 28/07/1447 AH.
@@ -14,9 +7,9 @@
 
 import SwiftUI
 
-struct SuspiciousView: View {
+struct ScamView: View {
     @State private var goToHome = false
-    let reasons: [String]
+    let reasons: [String] 
     var body: some View {
         NavigationStack{
             
@@ -31,45 +24,39 @@ struct SuspiciousView: View {
                     Spacer()
                     
                     // Icon
-                    Image(systemName: "exclamationmark.triangle.fill")
+                    Image(systemName: "xmark.circle")
                         .resizable()
                         .scaledToFit()
                         .frame(width: 120)
-                        .foregroundColor(Color(red: 229/255, green: 187/255, blue: 67/255))
+                        .foregroundColor( Color(red: 235/255, green: 84/255, blue: 54/255))
                     
                     // Title
-                    Text("Suspicious")
+                    Text("Scam")
                         .font(.system(size: 44, weight: .bold))
                         .foregroundColor(.white)
                     
                     // WHY
                     GlassInfoCard(
                         title: "Why",
-                        points: reasons.isEmpty
-                            ? [
-                                "The caller claimed to be from a trusted entity",
-                                "Created urgency",
-                                "Asked for unusual information"
-                              ]
-                            : reasons
+                        points: reasons
+
                     )
                     
                     // WHAT SHOULD I DO
                     GlassInfoCard(
                         title: "What should i do",
                         points: [
-                            "Do not share any personal information",
-                            "Do not click links or follow instructions",
-                            "Contact the organization using its official number"
-                            
+                            "Hang up immediately",
+                            "Do not share any information",
+                            "Report to authorities"
                         ]
                     )
                     
                     Spacer()
                     
-                    // DONE BUTTON (your existing glass button)
+                    // DONE BUTTON
                     LiquidGlassButton(
-                        title: "Got it ",
+                        title: "Got it",
                         systemIcon: nil,
                         tintColor: Color(red: 7/255, green: 169/255, blue: 204/255),
                         height: 65,
@@ -78,6 +65,7 @@ struct SuspiciousView: View {
                         goToHome = true
                         print("Done tapped")
                     }
+            
                     .frame(height: 10)
                     .frame(maxWidth: 280)
                     
@@ -88,14 +76,15 @@ struct SuspiciousView: View {
                 HomeView()
                     .navigationBarBackButtonHidden(true)
             }
+            
+            
         }
     }
 }
-
 #Preview {
-    SuspiciousView(reasons: [
+    ScamView(reasons: [
+        "Requests a one‑time password (OTP)",
         "Contains a suspicious link",
-        "Uses urgency or pressure",
-        "Asks for a verification code"
+        "Uses urgency or pressure tactics"
     ])
 }

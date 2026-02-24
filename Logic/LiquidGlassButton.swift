@@ -13,8 +13,8 @@ struct LiquidGlassButton: View {
     let title: String
     let systemIcon: String?
     let tintColor: Color
-    let height: CGFloat        // ⬅️ جديد
-    let cornerRadius: CGFloat  // ⬅️ جديد
+    let height: CGFloat
+    let cornerRadius: CGFloat  
     let action: () -> Void
     
     var body: some View {
@@ -25,13 +25,12 @@ struct LiquidGlassButton: View {
                 if let systemIcon {
                     Image(systemName: systemIcon)
                         .font(.system(size: 24, weight: .medium))
-                        .foregroundColor(.white)
-                }
+                    .foregroundColor(Color(.white))                }
                 
                 Text(title)
                     .font(.system(size: 26, weight: .medium))
             }
-            .foregroundColor(Color(red: 14/255, green: 30/255, blue: 38/255))
+            .foregroundColor(Color(.white))
             .padding()
             .frame(maxWidth: .infinity)
             .frame(height: height)
@@ -47,8 +46,7 @@ struct LiquidGlassButton: View {
                         .fill(
                             LinearGradient(
                                 colors: [
-//                                    Color.white.opacity(0.25),
-//                                    Color.white.opacity(0.05),
+
                                     tintColor.opacity(0.70)
                                 ],
                                 startPoint: .topLeading,
@@ -58,17 +56,7 @@ struct LiquidGlassButton: View {
                     
                     // Glass Highlight
                     RoundedRectangle(cornerRadius: 32)
-                        .stroke(
-                            LinearGradient(
-                                colors: [
-//                                    Color.white.opacity(0.6),
-                                    Color.clear
-                                ],
-                                startPoint: .topLeading,
-                                endPoint: .bottomTrailing
-                            ),
-                            lineWidth: 1
-                        )
+                        .stroke(Color.white.opacity(0.5), lineWidth: 1)
                 }
             )
         }
@@ -76,72 +64,6 @@ struct LiquidGlassButton: View {
     }
 }
 
-//import SwiftUI
-//
-//struct LiquidGlassButton: View {
-//    let title: String
-//    let systemIcon: String?
-//    let tintColor: Color
-//    let action: () -> Void
-//    
-//    var body: some View {
-//        Button(action: action) {
-//            HStack(spacing: 16) {
-////                Image(systemName: systemIcon)
-////                    .font(.system(size: 28, weight: .medium))
-//                if let systemIcon {
-//                                   Image(systemName: systemIcon)
-//                                       .font(.system(size: 24, weight: .medium))
-//                                       .foregroundColor(.white)
-//                               }
-//                
-//                Text(title)
-//                    .font(.system(size: 26, weight: .medium))
-//            }
-//            .foregroundColor(.white)
-//            .padding()
-//            .frame(maxWidth: .infinity)
-//            .frame(height: 90)
-//            .background(
-//                ZStack {
-//                    
-//                    // Glass Blur
-//                    RoundedRectangle(cornerRadius: 32)
-//                        .fill(.ultraThinMaterial)
-//                    
-//                    // Liquid Gradient
-//                    RoundedRectangle(cornerRadius: 32)
-//                        .fill(
-//                            LinearGradient(
-//                                colors: [
-////                                    Color.white.opacity(0.25),
-////                                    Color.white.opacity(0.05),
-//                                    Color.cyan.opacity(0.70)
-//                                ],
-//                                startPoint: .topLeading,
-//                                endPoint: .bottomTrailing
-//                            )
-//                        )
-//                    
-//                    // Glass Highlight
-//                    RoundedRectangle(cornerRadius: 32)
-//                        .stroke(
-//                            LinearGradient(
-//                                colors: [
-//                                    Color.white.opacity(0.6),
-//                                    Color.clear
-//                                ],
-//                                startPoint: .topLeading,
-//                                endPoint: .bottomTrailing
-//                            ),
-//                            lineWidth: 1
-//                        )
-//                }
-//            )
-//        }
-//        .buttonStyle(.plain)
-//    }
-//}
 
 
 
@@ -216,15 +138,16 @@ struct GlassInfoCard: View {
             
             ForEach(points, id: \.self) { point in
                 HStack(alignment: .top, spacing: 5) {
-//                    Text("•")
-//                        .foregroundColor(.white.opacity(0.9))
-//                        .font(.system(size: 17))
+                    Text("•")
+                        .foregroundColor(.white.opacity(0.9))
+                        .font(.system(size: 17))
                     
 
                     Text(point)
                         .foregroundColor(.white.opacity(0.9))
                         .font(.system(size: 17))
                         .fixedSize(horizontal: false, vertical: true)
+                    
                 }
             }
 

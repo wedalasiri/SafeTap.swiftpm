@@ -45,13 +45,6 @@ struct HomeView: View {
                     
                     VStack(spacing: 30) {
                         
-                        //                    LiquidGlassButton(
-                        //                        title: "Analyze message",
-                        //                        systemIcon: "message.fill"
-                        //                    ) {
-                        //                        print("Analyze message")
-                        //                    }
-                        
                         NavigationLink {
                             AnalyzeMessageView()
                              .navigationBarBackButtonHidden(true)
@@ -94,14 +87,11 @@ struct HomeView: View {
             }
             
             
-            // 🔥 Navigation destination
                         .navigationDestination(isPresented: $goToAnalyze) {
                             AnalyzeMessageView()
-//                                .navigationBarBackButtonHidden(true)
                         }
                         .navigationDestination(isPresented: $goToWhatShouldIdo) {
                             QuickCheckView()
-//                                .navigationBarBackButtonHidden(true)
                         }
         }
     }

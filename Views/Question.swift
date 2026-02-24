@@ -11,7 +11,7 @@ import SwiftUI
 struct QuickCheckView: View {
     
     
-    // جميع الأسئلة
+//all Question
     let questions: [String] = [
         """
 Did the caller ask for
@@ -19,9 +19,7 @@ a one-time password (OTP)
 or verification code?
 """,
         """
-Did the caller claim to be from
-a trusted organization and ask
-for sensitive information?
+Did the caller pretend to be from a trusted organization?
 """,
         """
 Did the caller rush or scare you
@@ -33,14 +31,22 @@ tell anyone about the call?
 """
     ]
     
+    
+    //hint if the user doesn't undrstsnd
     let hints: [String] = [
-        "", // السؤال الأول ← فاضي (ما راح يظهر)
-        "Banks may call, but they never ask for OTPs or passwords.",
-        "Urgency and threats are common scam tactics.",
-        "This is often used to prevent you from getting help."
+        "",
+        "Official organizations may call, but they never ask for OTPs or passwords",
+        "",
+        ""
     ]
 
-    
+//reasons for Question
+    let reasonsForYes: [String] = [
+        "Requested verification code (OTP)",
+        "Requested sensitive info and claimed to be from trusted organization",
+        "They try to scare or rush you so you act before checking if it’s real.",
+        "They ask you not to tell anyone so no one discovers the scam"
+    ]
     
     
     @State private var isAnalyzing = false
@@ -73,13 +79,7 @@ tell anyone about the call?
                 .ignoresSafeArea()
             
             VStack(spacing: 32) {
-                
-                // Progress Bar
-//                ProgressView(value: 0.15)
-//                    .progressViewStyle(LinearProgressViewStyle())
-//                    .tint(Color(red: 60/255, green: 190/255, blue: 170/255).opacity(53))
-//                    .frame(width: 300)
-//                    .padding(.top, 20)
+   
                 ProgressView(
                     value: Double(currentIndex + 1),
                     total: Double(questions.count)
@@ -105,7 +105,7 @@ tell anyone about the call?
                     .multilineTextAlignment(.center)
                     .padding(.horizontal, 24)
                 
-                if currentIndex > 0 {
+                if currentIndex > 0 && !hints[currentIndex].isEmpty {
                     Text(hints[currentIndex])
                         .font(.system(size: 20, weight: .medium))
                         .foregroundColor(.white)
@@ -124,7 +124,6 @@ tell anyone about the call?
                         .transition(.move(edge: .bottom).combined(with: .opacity))
                         .animation(.easeInOut, value: currentIndex)
                 }
-
                 
                 Spacer()
                 
@@ -139,7 +138,7 @@ tell anyone about the call?
 
                     ) {
                         riskScore += 1
-                        reasons.append(questions[currentIndex])
+                        reasons.append(reasonsForYes[currentIndex])
 
                         nextQuestion()
                         print("YES tapped")
@@ -164,7 +163,7 @@ tell anyone about the call?
             
             if isAnalyzing {
                 ZStack {
-                    // خلفية كاملة
+                  //backgournd
                     Color(red: 14/255, green: 30/255, blue: 38/255)
                         .ignoresSafeArea()
 
@@ -198,47 +197,13 @@ tell anyone about the call?
                 ScamView(reasons: reasons)
             }
         }
-//        if isAnalyzing {
-//            ZStack {
-//                // تعتيم الخلفية
-//                Color.black.opacity(0.45)
-//                    .ignoresSafeArea()
-//
-//                VStack(spacing: 20) {
-//                    Text("Analyzing your answers…")
-//                        .font(.system(size: 24, weight: .medium))
-//                        .foregroundColor(.white)
-//
-//                    ProgressView(
-//                        value: analyzingProgress,
-//                        total: 1
-//                    )
-//                    .progressViewStyle(LinearProgressViewStyle())
-//                    .tint(Color(red: 60/255, green: 190/255, blue: 170/255))
-//                    .frame(width: 300)
-//                }
-//                .padding(30)
-//                .background(
-//                    RoundedRectangle(cornerRadius: 24)
-//                        .fill(.ultraThinMaterial)
-//                )
-//                .transition(.opacity)
-//            }
-//        }
+
 
         
         
 
         
     }
-//    func nextQuestion() {
-//          if currentIndex < questions.count - 1 {
-//              currentIndex += 1
-//          } else {
-//              print("Finished questions")
-//              // هنا لاحقًا تنتقل لصفحة النتيجة
-//          }
-//      }
     func nextQuestion() {
         if currentIndex < questions.count - 1 {
             withAnimation(.easeInOut) {
@@ -259,25 +224,11 @@ tell anyone about the call?
                     }
                 }
             }
-//            Task { @MainActor in
-//                // Simulate progress on the main actor
-//                while analyzingProgress < 1 {
-//                    try? await Task.sleep(nanoseconds: 20_000_000) // 0.02s
-//                    analyzingProgress = min(analyzingProgress + 0.02, 1)
-//                }
-//                withAnimation(.easeOut) {
-//                    isAnalyzing = false
-//                    navigate = true
-//                }
-//            }
+
         }
     }
 }
-enum ResultType {
-    case safe
-    case suspicious
-    case scam
-}
+
 
 
 
