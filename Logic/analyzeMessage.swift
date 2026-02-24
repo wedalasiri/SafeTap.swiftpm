@@ -30,7 +30,7 @@ struct MessageAnalyzer {
         ]
         
         if sensitivePatterns.contains(where: { text.contains($0) }) {
-            reasons.append("Requests sensitive personal information")
+            reasons.append("Requests sensitive information")
             return AnalysisResult(type: .scam, reasons: reasons)
         }
         
