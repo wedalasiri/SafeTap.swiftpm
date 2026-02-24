@@ -64,9 +64,9 @@ tell anyone about the call?
     var resultType: ResultType {
         if riskScore == 0 {
             return .safe
-        } else if riskScore <= 2 {
+        } else if riskScore <= 1 {
             return .suspicious
-        } else if riskScore <= 4{
+        } else if riskScore <= 2{
             return .scam
         } else {
             return .scam
