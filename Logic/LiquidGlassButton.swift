@@ -20,8 +20,7 @@ struct LiquidGlassButton: View {
     var body: some View {
         Button(action: action) {
             HStack(spacing: 16) {
-//                Image(systemName: systemIcon)
-//                    .font(.system(size: 28, weight: .medium))
+
                 if let systemIcon {
                     Image(systemName: systemIcon)
                         .font(.system(size: 24, weight: .medium))
@@ -56,7 +55,7 @@ struct LiquidGlassButton: View {
                     
                     // Glass Highlight
                     RoundedRectangle(cornerRadius: 32)
-                        .stroke(Color.white.opacity(0.5), lineWidth: 1)
+                        .stroke(Color.white.opacity(0.4), lineWidth: 1)
                 }
             )
         }
