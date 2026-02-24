@@ -33,7 +33,7 @@ struct HomeView: View {
                         .scaledToFit()
                         .foregroundColor(Color(red: 7/255, green: 169/255, blue: 204/255))
                         .frame(width: 233, height: 185)
-                        .offset(x: 27)
+                        .offset(x: 22)
 
                     Text("SafeTap")
                         .font(.system(size: 48, weight: .bold))
